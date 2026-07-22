@@ -1,33 +1,18 @@
-# Simone Silva Advocacia — publicação
+# Publicação — Simone Silva Advocacia
 
-Esta versão foi preparada para upload direto pelo site do GitHub.
+Pacote estático pronto para GitHub Pages + Cloudflare.
 
-## Arquivos que devem aparecer na raiz do repositório
+## Arquivos essenciais
+Envie **todo o conteúdo desta pasta** para a raiz do repositório `simoneadv-site`.
 
-- index.html
-- politica-de-privacidade.html
-- favicon.svg
-- robots.txt
-- sitemap.xml
-- README_PUBLICACAO.md
-
-Não há pastas obrigatórias nesta versão. O CSS e o JavaScript já estão incorporados no index.html, evitando erros de estrutura durante o upload.
-
-## Como publicar no GitHub
-
-1. Abra o repositório `simoneadv-site`.
+## GitHub Pages
+1. Abra o repositório no GitHub.
 2. Clique em **Add file > Upload files**.
-3. Selecione todos os seis arquivos desta pasta.
-4. Mantenha marcada a opção de confirmar diretamente na branch principal.
-5. Clique em **Confirmar alterações**.
+3. Arraste todos os arquivos e pastas deste pacote.
+4. Clique em **Commit changes**.
+5. Abra **Settings > Pages**.
+6. Em **Build and deployment**, escolha **Deploy from a branch**.
+7. Branch: `main`; pasta: `/ (root)`; clique em **Save**.
 
-## Cloudflare Pages
-
-- Framework preset: None
-- Build command: vazio
-- Build output directory: `/`
-- Branch: main
-
-## Fotografias
-
-Os blocos com as iniciais “SS” são espaços temporários. Eles serão substituídos pelas fotografias definitivas em uma atualização posterior.
+## Domínio
+No GitHub Pages, informe `simoneadv.com.br` em **Custom domain**. A Cloudflare deve manter os registros DNS já configurados. Ative **Enforce HTTPS** quando aparecer disponível.
