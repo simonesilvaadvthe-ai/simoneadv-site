@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://simoneadv.com.br/sitemap.xml
