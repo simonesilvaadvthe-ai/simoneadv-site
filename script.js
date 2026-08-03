@@ -220,7 +220,121 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    /* ==========================================================
+       EVENTOS DO GOOGLE ANALYTICS 4
+    ========================================================== */
 
+    function enviarEventoGA4(nomeDoEvento, parametros = {}) {
+        if (typeof window.gtag !== "function") {
+            return;
+        }
+
+        window.gtag("event", nomeDoEvento, {
+            page_location: window.location.href,
+            page_title: document.title,
+            ...parametros
+        });
+    }
+
+        function identificarLocalDoClique(elemento) {
+        if (elemento.closest(".cabecalho")) {
+            return "cabecalho";
+        }
+
+        if (elemento.closest(".hero")) {
+            return "hero";
+        }
+
+        if (elemento.closest("#servicos")) {
+            return "servicos";
+        }
+
+        if (elemento.closest("#planejamento")) {
+            return "planejamento";
+        }
+
+        if (elemento.closest("#contato")) {
+            return "contato";
+        }
+
+        if (elemento.closest(".rodape")) {
+            return "rodape";
+        }
+
+        if (elemento.closest("#modal-em-breve")) {
+            return "modal_em_breve";
+        }
+
+        return "outro";
+    }
+
+        document.addEventListener("click", (evento) => {
+        const link = evento.target.closest("a[href]");
+
+        if (!link) {
+            return;
+        }
+
+        const href = link.href;
+        const textoDoLink = link.textContent.trim().replace(/\s+/g, " ");
+        const localDoClique = identificarLocalDoClique(link);
+
+        const parametros = {
+            link_text: textoDoLink,
+            link_url: href,
+            click_location: localDoClique
+        };
+
+        if (
+            href.includes("wa.me/") ||
+            href.includes("api.whatsapp.com/")
+        ) {
+            enviarEventoGA4("click_whatsapp", parametros);
+            return;
+        }
+
+        if (
+            href.includes("docs.google.com/forms/") ||
+            href.includes("forms.gle/")
+        ) {
+            enviarEventoGA4("planning_form_open", parametros);
+            return;
+        }
+
+        if (href.startsWith("mailto:")) {
+            enviarEventoGA4("click_email", parametros);
+            return;
+        }
+
+        if (href.startsWith("tel:")) {
+            enviarEventoGA4("click_phone", parametros);
+            return;
+        }
+
+        if (href.includes("instagram.com/")) {
+            enviarEventoGA4("click_instagram", parametros);
+            return;
+        }
+
+        if (
+            href.includes("google.com/maps") ||
+            href.includes("maps.app.goo.gl")
+        ) {
+            enviarEventoGA4("click_maps", parametros);
+        }
+    });
+
+        linksEmBreve.forEach((link) => {
+        link.addEventListener("click", () => {
+            enviarEventoGA4("service_interest_unavailable", {
+                service_name:
+                    link.getAttribute("data-servico") ||
+                    "Serviço não identificado",
+                link_text: link.textContent.trim().replace(/\s+/g, " "),
+                click_location: "servicos"
+            });
+        });
+    });
     /* ==========================================================
        ROLAGEM SUAVE NOS LINKS INTERNOS
     ========================================================== */
