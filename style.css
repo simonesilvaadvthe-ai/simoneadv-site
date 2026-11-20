@@ -273,12 +273,94 @@ p + p {
     backdrop-filter: blur(12px);
 }
 
-.cabecalho-conteudo {
+.cabecalho-utilidades,
+.cabecalho-navegacao {
+    border-bottom: 1px solid rgba(201, 167, 106, 0.24);
+}
+
+.cabecalho-utilidades-conteudo,
+.cabecalho-contato,
+.cabecalho-atalhos {
     display: flex;
-    min-height: 88px;
     align-items: center;
+    gap: 16px;
+}
+
+.cabecalho-utilidades-conteudo {
     justify-content: space-between;
-    gap: 30px;
+    min-height: 46px;
+    color: var(--azul-escuro);
+    font-size: 0.75rem;
+}
+
+.cabecalho-contato .botao-menu {
+    min-height: 31px;
+    padding: 4px 10px;
+}
+
+.cabecalho-busca {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(201, 167, 106, 0.55);
+    border-radius: 4px;
+}
+
+.cabecalho-busca[hidden],
+.cabecalho-resultados[hidden] {
+    display: none;
+}
+
+.cabecalho-busca input,
+.cabecalho-busca button {
+    padding: 4px 8px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+.cabecalho-busca input {
+    width: 135px;
+}
+
+.cabecalho-busca button {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.cabecalho-resultados {
+    position: absolute;
+    z-index: 1;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(280px, 64vw);
+    padding: 12px;
+    border: 1px solid var(--dourado);
+    background: var(--branco);
+}
+
+.cabecalho-resultados a {
+    display: block;
+    padding: 6px;
+    text-decoration: underline;
+}
+
+.cabecalho-marca {
+    position: relative;
+    display: flex;
+    min-height: 144px;
+    align-items: center;
+    justify-content: center;
+}
+
+.cabecalho-marca .marca-assinatura {
+    width: 320px;
+}
+
+.cabecalho-navegacao {
+    border-top: 1px solid rgba(201, 167, 106, 0.24);
+    border-bottom: 0;
 }
 
 .marca {
@@ -290,7 +372,9 @@ p + p {
 
 .menu {
     display: flex;
+    min-height: 49px;
     align-items: center;
+    justify-content: center;
     gap: 27px;
 }
 
@@ -1195,17 +1279,27 @@ button:focus-visible {
         padding: 85px 0;
     }
 
-    .cabecalho-conteudo {
-        min-height: 78px;
+    .cabecalho-marca {
+        min-height: 72px;
+    }
+
+    .cabecalho-marca .marca-assinatura {
+        width: 190px;
+    }
+
+    .cabecalho-navegacao {
+        border-top: 0;
     }
 
     .menu-mobile {
+        position: absolute;
+        right: 0;
         display: flex;
     }
 
     .menu {
         position: absolute;
-        top: 78px;
+        top: 100%;
         right: 0;
         left: 0;
         display: none;
@@ -1230,10 +1324,6 @@ button:focus-visible {
 
     .menu > a:not(.botao)::after {
         display: none;
-    }
-
-    .botao-menu {
-        margin-top: 18px;
     }
 
     .menu-mobile.ativo span:nth-child(1) {
@@ -1495,5 +1585,20 @@ button:focus-visible {
 @media (max-width: 480px) {
     .marca-assinatura {
         width: 145px;
+    }
+}
+
+@media (max-width: 560px) {
+    .cabecalho-telefone {
+        display: none;
+    }
+
+    .cabecalho-utilidades-conteudo,
+    .cabecalho-atalhos {
+        gap: 8px;
+    }
+
+    .cabecalho-busca input {
+        width: 100px;
     }
 }

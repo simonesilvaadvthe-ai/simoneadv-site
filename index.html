@@ -34,7 +34,7 @@ gtag('config', 'G-9WJBGXHYGD');
     >
 
     <link rel="icon" href="assets/images/icon-32.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=cabecalho">
 </head>
 
 <body>
@@ -44,41 +44,46 @@ gtag('config', 'G-9WJBGXHYGD');
     ======================================================= -->
 
     <header class="cabecalho" id="inicio">
-        <div class="container cabecalho-conteudo">
+        <div class="cabecalho-utilidades">
+            <div class="container cabecalho-utilidades-conteudo">
+                <div class="cabecalho-contato">
+                    <a class="cabecalho-telefone" href="tel:+5586999478280">(86) 99947-8280</a>
+                    <a class="botao botao-menu" href="https://wa.me/5586999478280"
+                        target="_blank" rel="noopener noreferrer">Conversar</a>
+                </div>
+                <div class="cabecalho-atalhos">
+                    <form class="cabecalho-busca" role="search" id="busca-site" hidden>
+                        <input type="search" name="q" aria-label="Buscar no site" placeholder="Buscar no site" required>
+                        <button type="submit" aria-label="Buscar">⌕</button>
+                        <div class="cabecalho-resultados" id="resultados-busca" aria-live="polite" hidden></div>
+                    </form>
+                    <a href="https://www.instagram.com/advogada.simonesilva/"
+                        target="_blank" rel="noopener noreferrer">Instagram</a>
+                </div>
+            </div>
+        </div>
 
+        <div class="container cabecalho-marca">
             <a href="#inicio" class="marca" aria-label="Ir para o início">
-                <img class="marca-assinatura" src="assets/images/marca-clara.png" alt="Simone Silva Advocacia">
+                <img class="marca-assinatura" src="assets/images/marca-clara.png"
+                    width="780" height="182" alt="Simone Silva Advocacia">
             </a>
-
-            <button
-                class="menu-mobile"
-                type="button"
-                aria-label="Abrir menu"
-                aria-expanded="false"
-                aria-controls="menu-principal"
-            >
+            <button class="menu-mobile" type="button" aria-label="Menu principal"
+                aria-expanded="false" aria-controls="menu-principal">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+        </div>
 
-            <nav class="menu" id="menu-principal" aria-label="Menu principal">
+        <div class="cabecalho-navegacao">
+            <nav class="container menu" id="menu-principal" aria-label="Menu principal">
                 <a href="#servicos">Serviços</a>
                 <a href="#como-atendemos">Como atendemos</a>
                 <a href="#planejamento">Planejamento</a>
                 <a href="#sobre">A instituição</a>
                 <a href="#faq">Dúvidas</a>
-
-                <a
-                    class="botao botao-menu"
-                    href="https://wa.me/5586999478280"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Conversar
-                </a>
             </nav>
-
         </div>
     </header>
 
@@ -1011,7 +1016,7 @@ gtag('config', 'G-9WJBGXHYGD');
     </a>
 
 
-    <script src="script.js"></script>
+    <script src="script.js?v=cabecalho"></script>
 
 </body>
 </html>

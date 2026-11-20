@@ -2,6 +2,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const botaoMenu = document.querySelector(".menu-mobile");
     const menu = document.querySelector(".menu");
 
+    const busca = document.getElementById("busca-site");
+    if (busca) {
+        const resultados = document.getElementById("resultados-busca");
+        const normalizar = (texto) => texto.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+
+        busca.hidden = false;
+        busca.addEventListener("submit", (evento) => {
+            evento.preventDefault();
+            const termos = normalizar(busca.elements.q.value.trim()).split(/\s+/);
+            resultados.replaceChildren();
+
+            for (const secao of document.querySelectorAll("main section[id]")) {
+                if (!termos.every((termo) => termo && normalizar(secao.textContent).includes(termo))) {
+                    continue;
+                }
+
+                const titulo = secao.querySelector("h2");
+                if (!titulo) continue;
+
+                const link = document.createElement("a");
+                link.href = "#" + secao.id;
+                link.textContent = titulo.textContent.trim();
+                link.addEventListener("click", (clique) => {
+                    clique.preventDefault();
+                    resultados.hidden = true;
+                    const cabecalho = busca.closest(".cabecalho");
+                    const topo = secao.getBoundingClientRect().top + window.scrollY - cabecalho.offsetHeight - 12;
+                    window.scrollTo({ top: topo, behavior: "smooth" });
+                });
+                resultados.append(link);
+            }
+
+            if (!resultados.childElementCount) {
+                resultados.textContent = "Nenhuma seção encontrada.";
+            }
+            resultados.hidden = false;
+        });
+
+        busca.addEventListener("keydown", (evento) => {
+            if (evento.key === "Escape") resultados.hidden = true;
+        });
+        document.addEventListener("click", (evento) => {
+            if (!busca.contains(evento.target)) resultados.hidden = true;
+        });
+    }
+
     const perguntasFaq = document.querySelectorAll(".faq-pergunta");
 
     const linksEmBreve = document.querySelectorAll("[data-em-breve]");
