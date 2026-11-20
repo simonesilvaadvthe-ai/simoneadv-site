@@ -1599,6 +1599,46 @@ button:focus-visible {
     }
 
     .cabecalho-busca input {
-        width: 100px;
+        width: 80px;
     }
+}
+
+.detalhes-servico summary {
+    display: list-item;
+    cursor: pointer;
+}
+
+.detalhes-servico h4 {
+    margin: 14px 0 6px;
+    color: var(--azul-escuro);
+}
+
+.formulario-contato {
+    display: grid;
+    width: min(100%, 430px);
+    gap: 8px;
+}
+
+.formulario-contato input,
+.formulario-contato textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--dourado);
+    border-radius: 4px;
+    background: var(--branco);
+    color: var(--azul-escuro);
+    font: inherit;
+}
+
+.formulario-contato textarea {
+    resize: vertical;
+}
+
+.formulario-contato .botao {
+    justify-self: start;
+    margin-top: 8px;
+}
+
+.contato-conteudo h2 + .botao {
+    margin-top: 20px;
 }

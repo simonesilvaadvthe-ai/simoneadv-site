@@ -50,11 +50,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const perguntasFaq = document.querySelectorAll(".faq-pergunta");
 
-    const linksEmBreve = document.querySelectorAll("[data-em-breve]");
-    const modal = document.getElementById("modal-em-breve");
-    const modalTitulo = document.getElementById("modal-titulo");
-    const modalTexto = document.getElementById("modal-texto");
-    const botoesFecharModal = document.querySelectorAll("[data-fechar-modal]");
+    const formularioContato = document.getElementById("formulario-contato");
+    formularioContato?.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+        const dados = new FormData(formularioContato);
+        const corpo = [
+            "Nome: " + dados.get("nome"),
+            "E-mail: " + dados.get("email"),
+            "",
+            dados.get("mensagem")
+        ].join("\r\n");
+        window.location.href = formularioContato.action +
+            "?subject=Contato%20pelo%20site&body=" + encodeURIComponent(corpo);
+    });
 
     const anoAtual = document.getElementById("ano-atual");
 
@@ -134,137 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-
-    /* ==========================================================
-       MODAL DAS PÁGINAS EM CONSTRUÇÃO
-    ========================================================== */
-
-    let elementoFocadoAntesDoModal = null;
-
-
-    function abrirModal(servico) {
-        if (!modal) {
-            return;
-        }
-
-        elementoFocadoAntesDoModal = document.activeElement;
-
-        if (modalTitulo) {
-            modalTitulo.textContent = `${servico}: página em construção`;
-        }
-
-        if (modalTexto) {
-            modalTexto.textContent =
-                "Estamos preparando um conteúdo completo sobre este serviço. " +
-                "A página será publicada assim que estiver pronta.";
-        }
-
-        modal.classList.add("ativo");
-        modal.setAttribute("aria-hidden", "false");
-
-        document.body.classList.add("modal-aberto");
-
-        const primeiroBotao = modal.querySelector(
-            "button, a, [tabindex]:not([tabindex='-1'])"
-        );
-
-        if (primeiroBotao) {
-            primeiroBotao.focus();
-        }
-    }
-
-
-    function fecharModal() {
-        if (!modal) {
-            return;
-        }
-
-        modal.classList.remove("ativo");
-        modal.setAttribute("aria-hidden", "true");
-
-        document.body.classList.remove("modal-aberto");
-
-        if (
-            elementoFocadoAntesDoModal &&
-            typeof elementoFocadoAntesDoModal.focus === "function"
-        ) {
-            elementoFocadoAntesDoModal.focus();
-        }
-    }
-
-
-    linksEmBreve.forEach((link) => {
-        link.addEventListener("click", (evento) => {
-            evento.preventDefault();
-
-            const servico =
-                link.getAttribute("data-servico") ||
-                "Este serviço";
-
-            abrirModal(servico);
-        });
-    });
-
-
-    botoesFecharModal.forEach((botao) => {
-        botao.addEventListener("click", fecharModal);
-    });
-
-
-    document.addEventListener("keydown", (evento) => {
-        if (
-            evento.key === "Escape" &&
-            modal &&
-            modal.classList.contains("ativo")
-        ) {
-            fecharModal();
-        }
-    });
-
-
-    if (modal) {
-        modal.addEventListener("keydown", (evento) => {
-            if (evento.key !== "Tab") {
-                return;
-            }
-
-            const elementosFocaveis = Array.from(
-                modal.querySelectorAll(
-                    "button:not([disabled]), " +
-                    "a[href], " +
-                    "input:not([disabled]), " +
-                    "select:not([disabled]), " +
-                    "textarea:not([disabled]), " +
-                    "[tabindex]:not([tabindex='-1'])"
-                )
-            ).filter((elemento) => {
-                return elemento.offsetParent !== null;
-            });
-
-            if (elementosFocaveis.length === 0) {
-                return;
-            }
-
-            const primeiroElemento = elementosFocaveis[0];
-            const ultimoElemento =
-                elementosFocaveis[elementosFocaveis.length - 1];
-
-
-            if (
-                evento.shiftKey &&
-                document.activeElement === primeiroElemento
-            ) {
-                evento.preventDefault();
-                ultimoElemento.focus();
-            } else if (
-                !evento.shiftKey &&
-                document.activeElement === ultimoElemento
-            ) {
-                evento.preventDefault();
-                primeiroElemento.focus();
-            }
-        });
-    }
 
     /* ==========================================================
        EVENTOS DO GOOGLE ANALYTICS 4
@@ -391,8 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (
                 !destinoId ||
-                destinoId === "#" ||
-                link.hasAttribute("data-em-breve")
+                destinoId === "#"
             ) {
                 return;
             }
