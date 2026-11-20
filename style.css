@@ -266,7 +266,7 @@ p + p {
 .cabecalho {
     position: sticky;
     z-index: 1000;
-    top: 0;
+    top: calc(-1 * (var(--altura-utilidades, 47px) + var(--altura-marca, 144px)));
     border-bottom: 1px solid rgba(201, 167, 106, 0.15);
     background: rgba(255, 255, 255, 0.96);
     box-shadow: 0 4px 18px rgba(14, 42, 71, 0.04);
@@ -1321,6 +1321,11 @@ button:focus-visible {
 
 @media (max-width: 920px) {
 
+    .cabecalho {
+        top: calc(-1 * var(--altura-utilidades, 47px));
+    }
+
+
     .secao {
         padding: 85px 0;
     }
@@ -1675,4 +1680,8 @@ button:focus-visible {
     .cabecalho-busca input {
         width: 70px;
     }
+}
+
+.cabecalho:has(.cabecalho-utilidades :focus-visible, .cabecalho-marca .marca:focus-visible) {
+    top: 0;
 }

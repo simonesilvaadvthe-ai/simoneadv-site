@@ -2,13 +2,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const botaoMenu = document.querySelector(".menu-mobile");
     const menu = document.querySelector(".menu");
 
+    const cabecalho = document.querySelector(".cabecalho");
+    const utilidades = cabecalho.querySelector(".cabecalho-utilidades");
+    const marca = cabecalho.querySelector(".cabecalho-marca");
+    const telaCompacta = window.matchMedia("(max-width: 920px)");
+
+    function alturaCabecalhoCompacto() {
+        return cabecalho.offsetHeight - utilidades.offsetHeight -
+            (telaCompacta.matches ? 0 : marca.offsetHeight);
+    }
+
+    function medirCabecalho() {
+        cabecalho.style.setProperty("--altura-utilidades", utilidades.offsetHeight + "px");
+        cabecalho.style.setProperty("--altura-marca", marca.offsetHeight + "px");
+        document.documentElement.style.scrollPaddingTop = alturaCabecalhoCompacto() + "px";
+    }
+
+    medirCabecalho();
+    const observadorCabecalho = new ResizeObserver(medirCabecalho);
+    observadorCabecalho.observe(utilidades);
+    observadorCabecalho.observe(marca);
+    observadorCabecalho.observe(cabecalho);
+
     const busca = document.getElementById("busca-site");
     if (busca) {
         const resultados = document.getElementById("resultados-busca");
         const normalizar = (texto) => texto.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
         let destaque;
-        const cabecalho = busca.closest(".cabecalho");
         const conteudo = document.querySelector("main");
 
         busca.hidden = false;
@@ -60,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         resultados.replaceChildren();
                         destaque.focus({ preventScroll: true });
                         const topo = destaque.getBoundingClientRect().top + window.scrollY;
-                        window.scrollTo({ top: topo - cabecalho.offsetHeight - 24, behavior: "smooth" });
+                        window.scrollTo({ top: topo - alturaCabecalhoCompacto() - 24, behavior: "smooth" });
                     });
                     resultados.append(botao);
                     if (resultados.childElementCount === 20) break;
@@ -347,14 +368,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             evento.preventDefault();
 
-            const alturaCabecalho =
-                document.querySelector(".cabecalho")?.offsetHeight || 0;
-
-            const posicaoDestino =
-                destino.getBoundingClientRect().top +
-                window.scrollY -
-                alturaCabecalho -
-                12;
+            const posicaoDestino = destino === cabecalho
+                ? 0
+                : destino.getBoundingClientRect().top + window.scrollY - alturaCabecalhoCompacto() - 12;
 
             window.scrollTo({
                 top: posicaoDestino,
