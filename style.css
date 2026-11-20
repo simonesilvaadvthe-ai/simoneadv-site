@@ -340,10 +340,23 @@ p + p {
     background: var(--branco);
 }
 
-.cabecalho-resultados a {
+.cabecalho-resultados {
+    max-height: min(50vh, 320px);
+    overflow-y: auto;
+}
+
+.cabecalho-resultados button {
     display: block;
-    padding: 6px;
+    width: 100%;
+    padding: 8px;
+    font-size: inherit;
+    text-align: left;
     text-decoration: underline;
+}
+
+.termo-encontrado {
+    background: #ffdf81;
+    color: var(--azul-escuro);
 }
 
 .cabecalho-marca {

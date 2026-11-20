@@ -7,36 +7,67 @@ document.addEventListener("DOMContentLoaded", () => {
         const resultados = document.getElementById("resultados-busca");
         const normalizar = (texto) => texto.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
+        let destaque;
+        const cabecalho = busca.closest(".cabecalho");
+        const conteudo = document.querySelector("main");
+
         busca.hidden = false;
         busca.addEventListener("submit", (evento) => {
             evento.preventDefault();
-            const termos = normalizar(busca.elements.q.value.trim()).split(/\s+/);
+            if (destaque) {
+                const pai = destaque.parentNode;
+                destaque.replaceWith(...destaque.childNodes);
+                pai.normalize();
+                destaque = null;
+            }
             resultados.replaceChildren();
 
-            for (const secao of document.querySelectorAll("main section[id]")) {
-                if (!termos.every((termo) => termo && normalizar(secao.textContent).includes(termo))) {
-                    continue;
+            const consulta = normalizar(busca.elements.q.value.trim());
+            const padrao = consulta.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s+");
+            const expresso = new RegExp(padrao, "g");
+            const textos = document.createTreeWalker(conteudo, NodeFilter.SHOW_TEXT);
+            let texto;
+            while (consulta && resultados.childElementCount < 20 && (texto = textos.nextNode())) {
+                if (texto.parentElement.closest("script, style, [aria-hidden='true']")) continue;
+
+                const trecho = texto.data;
+                for (const achado of normalizar(trecho).matchAll(expresso)) {
+                    const inicio = achado.index;
+                    const fim = inicio + achado[0].length;
+                    const contexto = trecho.slice(Math.max(0, inicio - 42), fim + 58)
+                        .trim().replace(/\s+/g, " ");
+                    const alvo = texto;
+                    const botao = document.createElement("button");
+                    botao.type = "button";
+                    botao.textContent = contexto;
+                    botao.addEventListener("click", () => {
+                        const faixa = document.createRange();
+                        faixa.setStart(alvo, inicio);
+                        faixa.setEnd(alvo, fim);
+                        for (let pai = alvo.parentElement; pai !== conteudo; pai = pai.parentElement) {
+                            if (pai.matches("details")) pai.open = true;
+                        }
+
+                        const pergunta = alvo.parentElement.closest(".faq-resposta")
+                            ?.closest(".faq-item").querySelector(".faq-pergunta");
+                        if (pergunta?.getAttribute("aria-expanded") === "false") pergunta.click();
+
+                        destaque = document.createElement("mark");
+                        destaque.className = "termo-encontrado";
+                        destaque.tabIndex = -1;
+                        faixa.surroundContents(destaque);
+                        resultados.hidden = true;
+                        resultados.replaceChildren();
+                        destaque.focus({ preventScroll: true });
+                        const topo = destaque.getBoundingClientRect().top + window.scrollY;
+                        window.scrollTo({ top: topo - cabecalho.offsetHeight - 24, behavior: "smooth" });
+                    });
+                    resultados.append(botao);
+                    if (resultados.childElementCount === 20) break;
                 }
-
-                const titulo = secao.querySelector("h2");
-                if (!titulo) continue;
-
-                const link = document.createElement("a");
-                link.href = "#" + secao.id;
-                link.textContent = titulo.textContent.trim();
-                link.addEventListener("click", (clique) => {
-                    clique.preventDefault();
-                    resultados.hidden = true;
-                    const cabecalho = busca.closest(".cabecalho");
-                    const topo = secao.getBoundingClientRect().top + window.scrollY - cabecalho.offsetHeight - 12;
-                    window.scrollTo({ top: topo, behavior: "smooth" });
-                });
-                resultados.append(link);
             }
 
-            if (!resultados.childElementCount) {
-                resultados.textContent = "Nenhuma seção encontrada.";
-            }
+            if (!resultados.childElementCount) resultados.textContent = "Nenhum trecho encontrado.";
             resultados.hidden = false;
         });
 
