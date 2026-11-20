@@ -780,7 +780,7 @@ gtag('config', 'G-9WJBGXHYGD');
                 </div>
 
                 <form class="formulario-contato" id="formulario-contato"
-                    action="mailto:atendimento@simoneadv.com.br" method="post" enctype="text/plain" aria-label="Formulário de contato">
+                    action="https://script.google.com/macros/s/AKfycbzmIDkFKq88yUISQiRs1t__MwkEOImQzJvWUUuh02vn1BHE6gzhdcjgOKIU9URPOJjd/exec" method="post" target="resposta-contato" aria-label="Formulário de contato">
                     <input id="contato-nome" name="nome" autocomplete="name" maxlength="120"
                         aria-label="Nome" placeholder="Nome" required>
                     <input id="contato-email" name="email" type="email" autocomplete="email" maxlength="180"
@@ -788,10 +788,14 @@ gtag('config', 'G-9WJBGXHYGD');
                     <textarea id="contato-mensagem" name="mensagem" rows="6" maxlength="1000"
                         aria-label="Mensagem" placeholder="Mensagem" required></textarea>
                     <div class="contato-acoes">
-                        <p>O botão abre a mensagem no seu aplicativo de e-mail.</p>
-                        <button class="botao botao-primario" type="submit">Enviar por e-mail</button>
+                        <p id="status-contato" role="status"></p>
+                        <button class="botao botao-primario" type="submit" disabled>Enviar</button>
                     </div>
+                    <input type="hidden" name="protocolo">
+                    <div hidden><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
                 </form>
+                <iframe id="resposta-contato" name="resposta-contato" title="Resposta do formulário" hidden></iframe>
+                <noscript><p>Para enviar pela página, ative o JavaScript ou escreva para <a href="mailto:atendimento@simoneadv.com.br">atendimento@simoneadv.com.br</a>.</p></noscript>
             </div>
         </section>
 
@@ -891,7 +895,7 @@ gtag('config', 'G-9WJBGXHYGD');
     </a>
 
 
-    <script src="script.js?v=busca-trecho"></script>
+    <script src="script.js?v=envio-contato"></script>
 
 </body>
 </html>

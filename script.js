@@ -82,18 +82,53 @@ document.addEventListener("DOMContentLoaded", () => {
     const perguntasFaq = document.querySelectorAll(".faq-pergunta");
 
     const formularioContato = document.getElementById("formulario-contato");
-    formularioContato?.addEventListener("submit", (evento) => {
-        evento.preventDefault();
-        const dados = new FormData(formularioContato);
-        const corpo = [
-            "Nome: " + dados.get("nome"),
-            "E-mail: " + dados.get("email"),
-            "",
-            dados.get("mensagem")
-        ].join("\r\n");
-        window.location.href = formularioContato.action +
-            "?subject=Contato%20pelo%20site&body=" + encodeURIComponent(corpo);
-    });
+    if (formularioContato) {
+        const resposta = document.getElementById("resposta-contato");
+        const status = document.getElementById("status-contato");
+        const botao = formularioContato.querySelector("button[type='submit']");
+        let protocolo;
+        let prazo;
+        botao.disabled = false;
+
+        formularioContato.addEventListener("submit", (evento) => {
+            if (botao.disabled) {
+                evento.preventDefault();
+                return;
+            }
+
+            protocolo ||= crypto.randomUUID();
+            formularioContato.elements.protocolo.value = protocolo;
+            botao.disabled = true;
+            status.textContent = "Enviando…";
+            prazo = setTimeout(() => {
+                botao.disabled = false;
+                status.textContent = "Sem confirmação de envio. Tente novamente ou escreva para atendimento@simoneadv.com.br.";
+            }, 25000);
+        });
+
+        window.addEventListener("message", (evento) => {
+            const dados = evento.data;
+            if (!/^https:\/\/(?:script\.google\.com|(?:[a-z0-9-]+\.)?googleusercontent\.com)$/i.test(evento.origin) ||
+                !protocolo || dados?.tipo !== "contato-site" || dados.protocolo !== protocolo ||
+                typeof dados.enviado !== "boolean") return;
+
+            let origem = evento.source;
+            while (origem && origem !== window && origem !== resposta.contentWindow) {
+                const pai = origem.parent;
+                if (pai === origem) break;
+                origem = pai;
+            }
+            if (origem !== resposta.contentWindow) return;
+
+            clearTimeout(prazo);
+            protocolo = null;
+            botao.disabled = false;
+            if (dados.enviado) formularioContato.reset();
+            status.textContent = dados.enviado
+                ? "Mensagem enviada ao escritório."
+                : "Não foi possível enviar a mensagem. Confira os campos e tente novamente.";
+        });
+    }
 
     const anoAtual = document.getElementById("ano-atual");
 
