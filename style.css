@@ -3,22 +3,23 @@
 ========================================================== */
 
 :root {
-    --azul-principal: #126bad;
-    --azul-escuro: #12324a;
-    --azul-profundo: #0d2639;
+    --azul-principal: #0e2a47;
+    --azul-escuro: #0e2a47;
+    --azul-profundo: #0e2a47;
 
-    --dourado: #b7904b;
-    --dourado-claro: #d5bd89;
+    --dourado: #c9a76a;
+    --dourado-claro: var(--dourado);
+    --dourado-texto: #735a2e;
 
-    --bege-claro: #f6f1e9;
-    --bege-medio: #eee6da;
+    --bege-claro: #f7f6f2;
+    --bege-medio: #e7e1d6;
     --branco: #ffffff;
 
-    --cinza-texto: #4f5559;
+    --cinza-texto: #36566e;
     --cinza-claro: #e5e5e5;
 
-    --sombra-suave: 0 18px 45px rgba(18, 50, 74, 0.08);
-    --sombra-cartao: 0 12px 30px rgba(18, 50, 74, 0.06);
+    --sombra-suave: 0 18px 45px rgba(14, 42, 71, 0.08);
+    --sombra-cartao: 0 12px 30px rgba(14, 42, 71, 0.06);
 
     --fonte-titulo: "Cinzel", serif;
     --fonte-texto: "Montserrat", sans-serif;
@@ -105,12 +106,12 @@ address {
     width: 62px;
     height: 3px;
     margin-bottom: 22px;
-    background: var(--dourado);
+    background: url("assets/images/linha-respiro.png") left center / contain no-repeat;
 }
 
 .sobre-titulo {
     margin-bottom: 15px;
-    color: var(--dourado);
+    color: var(--dourado-texto);
     font-size: 0.77rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -220,7 +221,7 @@ p + p {
 .botao-primario:hover {
     border-color: var(--azul-escuro);
     background: var(--azul-escuro);
-    box-shadow: 0 10px 24px rgba(18, 50, 74, 0.18);
+    box-shadow: 0 10px 24px rgba(14, 42, 71, 0.18);
 }
 
 .botao-secundario {
@@ -231,7 +232,7 @@ p + p {
 
 .botao-secundario:hover {
     background: var(--dourado);
-    color: var(--branco);
+    color: var(--azul-escuro);
 }
 
 .botao-formulario {
@@ -266,9 +267,9 @@ p + p {
     position: sticky;
     z-index: 1000;
     top: 0;
-    border-bottom: 1px solid rgba(183, 144, 75, 0.15);
+    border-bottom: 1px solid rgba(201, 167, 106, 0.15);
     background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 4px 18px rgba(18, 50, 74, 0.04);
+    box-shadow: 0 4px 18px rgba(14, 42, 71, 0.04);
     backdrop-filter: blur(12px);
 }
 
@@ -285,43 +286,6 @@ p + p {
     flex-shrink: 0;
     align-items: center;
     gap: 14px;
-}
-
-.marca-monograma {
-    display: inline-flex;
-    width: 55px;
-    height: 55px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--dourado);
-    color: var(--dourado);
-    font-family: var(--fonte-titulo);
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-}
-
-.marca-texto {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-}
-
-.marca-texto strong {
-    color: var(--azul-escuro);
-    font-family: var(--fonte-titulo);
-    font-size: 1rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.marca-texto small {
-    margin-top: 4px;
-    color: var(--dourado);
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
 }
 
 .menu {
@@ -363,7 +327,7 @@ p + p {
 
 .botao-menu:hover {
     background: var(--dourado);
-    color: var(--branco);
+    color: var(--azul-escuro);
 }
 
 .menu-mobile {
@@ -398,8 +362,8 @@ p + p {
             90deg,
             var(--bege-claro) 0%,
             var(--bege-claro) 54%,
-            #ece4d8 54%,
-            #ece4d8 100%
+            #e7e1d6 54%,
+            #e7e1d6 100%
         );
 }
 
@@ -436,7 +400,7 @@ p + p {
 
 .frase-destaque {
     margin-top: 22px;
-    color: var(--dourado);
+    color: var(--dourado-texto);
     font-family: var(--fonte-titulo);
     font-size: 1.08rem;
     font-weight: 600;
@@ -459,7 +423,7 @@ p + p {
     gap: 26px;
     margin-top: 36px;
     padding-top: 25px;
-    border-top: 1px solid rgba(183, 144, 75, 0.25);
+    border-top: 1px solid rgba(201, 167, 106, 0.25);
 }
 
 .hero-informacoes > div {
@@ -469,7 +433,7 @@ p + p {
 }
 
 .hero-informacoes span {
-    color: var(--dourado);
+    color: var(--dourado-texto);
     font-size: 1.25rem;
 }
 
@@ -496,7 +460,7 @@ p + p {
     background: linear-gradient(
         to right,
         var(--bege-claro),
-        rgba(246, 241, 233, 0)
+        rgba(247, 246, 242, 0)
     );
     content: "";
     pointer-events: none;
@@ -530,7 +494,7 @@ p + p {
     flex-direction: column;
     padding: 34px 31px;
     overflow: hidden;
-    border: 1px solid rgba(18, 50, 74, 0.12);
+    border: 1px solid rgba(14, 42, 71, 0.12);
     background: var(--branco);
     box-shadow: var(--sombra-cartao);
     transition:
@@ -541,7 +505,7 @@ p + p {
 
 .cartao-servico:hover {
     transform: translateY(-7px);
-    border-color: rgba(183, 144, 75, 0.55);
+    border-color: rgba(201, 167, 106, 0.55);
     box-shadow: var(--sombra-suave);
 }
 
@@ -550,7 +514,7 @@ p + p {
     background:
         linear-gradient(
             145deg,
-            rgba(246, 241, 233, 0.75),
+            rgba(247, 246, 242, 0.75),
             rgba(255, 255, 255, 1)
         );
 }
@@ -563,7 +527,7 @@ p + p {
     justify-content: center;
     margin-bottom: 25px;
     border: 1px solid var(--dourado);
-    color: var(--dourado);
+    color: var(--dourado-texto);
     font-family: var(--fonte-titulo);
     font-size: 1.3rem;
 }
@@ -612,7 +576,7 @@ p + p {
     padding: 7px 10px;
     transform: rotate(40deg);
     background: var(--dourado);
-    color: var(--branco);
+    color: var(--azul-escuro);
     font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -724,6 +688,7 @@ p + p {
 }
 
 .manifesto-conteudo .linha-dourada {
+    background-image: url("assets/images/linha-respiro-escura.png");
     margin-right: auto;
     margin-left: auto;
 }
@@ -817,7 +782,7 @@ p + p {
 .grade-preparacao article {
     min-height: 290px;
     padding: 34px 27px;
-    border: 1px solid rgba(18, 50, 74, 0.12);
+    border: 1px solid rgba(14, 42, 71, 0.12);
     background: var(--branco);
     box-shadow: var(--sombra-cartao);
 }
@@ -860,9 +825,9 @@ p + p {
 }
 
 .faq-item {
-    border: 1px solid rgba(18, 50, 74, 0.12);
+    border: 1px solid rgba(14, 42, 71, 0.12);
     background: var(--branco);
-    box-shadow: 0 8px 22px rgba(18, 50, 74, 0.04);
+    box-shadow: 0 8px 22px rgba(14, 42, 71, 0.04);
 }
 
 .faq-pergunta {
@@ -889,7 +854,7 @@ p + p {
     justify-content: center;
     border: 1px solid var(--dourado);
     border-radius: 50%;
-    color: var(--dourado);
+    color: var(--dourado-texto);
     font-size: 1.25rem;
     font-weight: 400;
     line-height: 1;
@@ -971,14 +936,6 @@ p + p {
     grid-template-columns: 1.35fr 0.75fr 0.95fr 1.15fr;
     gap: 52px;
     padding-bottom: 55px;
-}
-
-.marca-rodape .marca-monograma {
-    color: var(--dourado-claro);
-}
-
-.marca-rodape .marca-texto strong {
-    color: var(--branco);
 }
 
 .rodape-marca > p {
@@ -1081,7 +1038,7 @@ p + p {
 .modal-fundo {
     position: absolute;
     inset: 0;
-    background: rgba(8, 28, 42, 0.78);
+    background: rgba(14, 42, 71, 0.78);
     backdrop-filter: blur(5px);
 }
 
@@ -1174,7 +1131,7 @@ p + p {
 
 a:focus-visible,
 button:focus-visible {
-    outline: 3px solid rgba(18, 107, 173, 0.35);
+    outline: 3px solid rgba(14, 42, 71, 0.35);
     outline-offset: 4px;
 }
 
@@ -1255,9 +1212,9 @@ button:focus-visible {
         align-items: stretch;
         gap: 0;
         padding: 18px 20px 24px;
-        border-top: 1px solid rgba(18, 50, 74, 0.08);
+        border-top: 1px solid rgba(14, 42, 71, 0.08);
         background: var(--branco);
-        box-shadow: 0 18px 28px rgba(18, 50, 74, 0.12);
+        box-shadow: 0 18px 28px rgba(14, 42, 71, 0.12);
     }
 
     .menu.ativo {
@@ -1267,7 +1224,7 @@ button:focus-visible {
 
     .menu > a:not(.botao) {
         padding: 14px 4px;
-        border-bottom: 1px solid rgba(18, 50, 74, 0.08);
+        border-bottom: 1px solid rgba(14, 42, 71, 0.08);
         font-size: 0.72rem;
     }
 
@@ -1317,7 +1274,7 @@ button:focus-visible {
         background: linear-gradient(
             to bottom,
             var(--bege-claro),
-            rgba(246, 241, 233, 0)
+            rgba(247, 246, 242, 0)
         );
     }
 
@@ -1381,20 +1338,6 @@ button:focus-visible {
 
     .marca {
         gap: 10px;
-    }
-
-    .marca-monograma {
-        width: 46px;
-        height: 46px;
-        font-size: 1rem;
-    }
-
-    .marca-texto strong {
-        font-size: 0.78rem;
-    }
-
-    .marca-texto small {
-        font-size: 0.55rem;
     }
 
     .hero-conteudo {
@@ -1540,15 +1483,17 @@ button:focus-visible {
         font-size: 1.85rem;
     }
 
-    .marca-texto strong {
-        font-size: 0.7rem;
-    }
-
-    .marca-texto small {
-        letter-spacing: 0.15em;
-    }
-
     .hero-imagem {
         min-height: 380px;
+    }
+}
+.marca-assinatura {
+    width: 178px;
+    height: auto;
+}
+
+@media (max-width: 480px) {
+    .marca-assinatura {
+        width: 145px;
     }
 }
