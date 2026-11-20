@@ -34,7 +34,7 @@ gtag('config', 'G-9WJBGXHYGD');
     >
 
     <link rel="icon" href="assets/images/icon-32.png">
-    <link rel="stylesheet" href="style.css?v=conteudo">
+    <link rel="stylesheet" href="style.css?v=formulario-contato">
 </head>
 
 <body>
@@ -761,23 +761,26 @@ gtag('config', 'G-9WJBGXHYGD');
         <section class="contato" id="contato">
             <div class="container contato-conteudo">
 
-                <div>
-                    <span class="linha-dourada"></span>
-                    <h2>Fale com o escritório</h2>
-                    <a class="botao botao-claro" href="https://wa.me/5586999478280"
-                        target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
+                <div class="contato-introducao">
+                    <span class="linha-dourada" aria-hidden="true"></span>
+                    <h2>Contato</h2>
+                    <p class="sobre-titulo">Agende uma consulta</p>
+                    <p>Informe seu nome e e-mail e conte brevemente como podemos ajudar.</p>
                 </div>
+
                 <form class="formulario-contato" id="formulario-contato"
                     action="mailto:atendimento@simoneadv.com.br" method="post" enctype="text/plain" aria-label="Formulário de contato">
-                    <label for="contato-nome">Nome</label>
-                    <input id="contato-nome" name="nome" autocomplete="name" maxlength="120" required>
-                    <label for="contato-email">E-mail</label>
-                    <input id="contato-email" name="email" type="email" autocomplete="email" maxlength="180" required>
-                    <label for="contato-mensagem">Mensagem</label>
-                    <textarea id="contato-mensagem" name="mensagem" rows="4" maxlength="1000" required></textarea>
-                    <button class="botao botao-claro" type="submit">Abrir rascunho de e-mail</button>
+                    <input id="contato-nome" name="nome" autocomplete="name" maxlength="120"
+                        aria-label="Nome" placeholder="Nome" required>
+                    <input id="contato-email" name="email" type="email" autocomplete="email" maxlength="180"
+                        aria-label="E-mail" placeholder="E-mail" required>
+                    <textarea id="contato-mensagem" name="mensagem" rows="6" maxlength="1000"
+                        aria-label="Mensagem" placeholder="Mensagem" required></textarea>
+                    <div class="contato-acoes">
+                        <p>O botão abre a mensagem no seu aplicativo de e-mail.</p>
+                        <button class="botao botao-primario" type="submit">Enviar por e-mail</button>
+                    </div>
                 </form>
-
             </div>
         </section>
 
