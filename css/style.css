@@ -3,4 +3,10 @@
 @media(max-width:620px){.wrap{width:min(100% - 32px,1180px)}.nav-wrap{height:72px}.menu{top:72px}.logo strong{font-size:14px}.hero-copy{padding-top:44px}.hero h1{font-size:39px}.hero-photo{height:500px}.buttons{flex-direction:column;align-items:stretch}.btn{width:100%}.help{padding:60px 0}.center-head h2{font-size:28px}.help-grid{grid-template-columns:1fr}.help-grid article{border-right:0;min-height:240px}.care{grid-template-columns:1fr}.care-photo{height:480px}.care-nav{grid-column:auto;grid-template-columns:1fr 1fr}.care-nav button:last-child{grid-column:1/-1}.institution-grid{grid-template-columns:1fr}.institution-copy,.simone-copy{padding:42px 16px}.institution-copy{border-right:0;border-bottom:1px solid var(--line)}.institution figure{grid-column:auto;height:500px}.manifesto h2{font-size:30px}.planning-copy{padding:46px 16px}.planning h2{font-size:29px}.pre-meeting,.faq{padding:60px 0}.cta-grid{grid-template-columns:1fr;text-align:center}.footer-top{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:8px;text-align:center}.whatsapp{width:50px;height:50px;right:16px;bottom:16px}}
 
 .logo .marca-assinatura {width:178px;height:auto}
-.gold-rule {background:url("../assets/images/linha-respiro.png") center / contain no-repeat}
+.gold-rule {
+    width: clamp(140px, 20vw, 176px);
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 780 / 40;
+    background: url("../assets/images/linha-respiro.png") center / contain no-repeat;
+}

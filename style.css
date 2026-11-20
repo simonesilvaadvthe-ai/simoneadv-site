@@ -103,8 +103,8 @@ address {
 
 .linha-dourada {
     display: block;
-    width: 62px;
-    height: 3px;
+    width: clamp(176px, 22vw, 224px);
+    aspect-ratio: 780 / 40;
     margin-bottom: 22px;
     background: url("assets/images/linha-respiro.png") left center / contain no-repeat;
 }
