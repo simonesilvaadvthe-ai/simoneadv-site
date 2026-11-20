@@ -1640,3 +1640,26 @@ button:focus-visible {
     margin: 14px 0 6px;
     color: var(--azul-escuro);
 }
+
+.rede-social-icone {
+    display: inline-flex;
+    width: 26px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+}
+
+.rede-social-icone:hover,
+.rede-social-icone:focus-visible {
+    color: var(--dourado);
+}
+
+@media (max-width: 380px) {
+    .cabecalho-atalhos {
+        gap: 4px;
+    }
+
+    .cabecalho-busca input {
+        width: 70px;
+    }
+}
